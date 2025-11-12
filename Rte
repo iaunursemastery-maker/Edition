@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PBDCL Nursing Education</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C7FB8;
+            --secondary: #7FBC41;
+            --accent1: #FF6B6B;
+            --accent2: #4ECDC4;
+            --accent3: #9D6CFF;
+            --light: #F5F9FC;
+            --dark: #2D3748;
+            --text: #4A5568;
+            --font-size: 1.3rem;
+            --title-size: 2.5rem;
+            --card-title-size: 1.5rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f9fc 0%, #e6f0f7 100%);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .presentation-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        .sidebar {
+            width: 80px;
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .nav-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+        
+        .nav-dot.completed {
+            background: var(--secondary);
+        }
+        
+        .slides-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 60px;
+            display: none;
+            flex-direction: column;
+            background: white;
+            border-radius: 20px 0 0 20px;
+            margin-left: 10px;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.08);
+            overflow-y: auto;
+        }
+        
+        .slide.active {
+            display: flex;
+            animation: slideIn 0.6s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: var(--title-size);
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+        
+        .slide-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--light);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .slide-content {
+            flex: 1;
+            padding: 10px 0;
+            font-size: var(--font-size);
+            line-height: 1.6;
+        }
+        
+        .content-card {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 6px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: var(--card-title-size);
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 12px;
+            color: var(--primary);
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .icon-list li {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .icon-list i {
+            margin-right: 12px;
+            margin-top: 5px;
+            color: var(--secondary);
+        }
+        
+        .principle-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid var(--accent1);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .principle-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent1);
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent2);
+            color: white;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--accent2);
+        }
+        
+        .benefit-item i {
+            color: var(--accent2);
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--accent3);
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: var(--accent3);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .challenge-solution {
+            display: flex;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+        
+        .challenge {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(255, 107, 107, 0.1);
+            border-right: 1px dashed #ddd;
+        }
+        
+        .solution {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(126, 217, 87, 0.1);
+        }
+        
+        .body-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid var(--primary);
+        }
+        
+        /* Split-screen slides */
+        .split-slide {
+            flex-direction: row !important;
+            padding: 0 !important;
+            border-radius: 20px 0 0 20px !important;
+        }
+        
+        .split-container {
+            height: 100%;
+            display: flex;
+            transition: all .4s;
+        }
+        
+        .split-left, .split-right {
+            height: 100%;
+            overflow: auto;
+        }
+        
+        .split-left {
+            flex-basis: 35%;
+            background: #fff;
+            box-shadow: 2px 0 20px rgba(16,24,40,.06);
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+        
+        .split-right {
+            flex: 1;
+            background: #0b1220;
+        }
+        
+        .split-controls {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .split-drag {
+            width: 8px;
+            cursor: col-resize;
+            background: transparent;
+        }
+        
+        .split-slide-content {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .36s,transform .36s;
+            min-height: 100%;
+        }
+        
+        .split-slide-content.active {
+            opacity: 1;
+            transform: none;
+        }
+        
+        input.split-url {
+            width: 100%;
+            padding: .6rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .split-nav {
+            display: flex;
+            gap: .5rem;
+            margin-top: 1rem;
+        }
+        
+        .split-button {
+            padding: .5rem .8rem;
+            border-radius: 8px;
+            border: none;
+            background: var(--primary);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .split-button:hover {
+            background: var(--secondary);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* Font Size Controls */
+        .font-controls {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .font-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .font-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Navigation Controls */
+        .nav-controls {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(44, 127, 184, 0.4);
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+        
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .circle1 {
+            top: 5%;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+        
+        .circle2 {
+            bottom: 10%;
+            left: 3%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--secondary);
+        }
+        
+        .circle3 {
+            top: 40%;
+            right: 15%;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--accent1);
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            z-index: 101;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 30px 40px;
+            }
+            
+            .slide-title {
+                font-size: calc(var(--title-size) * 0.85);
+            }
+            
+            .slide-content {
+                font-size: calc(var(--font-size) * 0.9);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .presentation-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 70px;
+                flex-direction: row;
+                justify-content: center;
+                padding: 0 20px;
+            }
+            
+            .logo {
+                margin-bottom: 0;
+                margin-right: 20px;
+            }
+            
+            .nav-dots {
+                flex-direction: row;
+                gap: 20px;
+            }
+            
+            .slide {
+                margin-left: 0;
+                margin-top: 10px;
+                border-radius: 20px 20px 0 0;
+                padding: 25px;
+            }
+            
+            .slide-title {
+                font-size: calc(var(--title-size) * 0.75);
+            }
+            
+            .split-slide {
+                flex-direction: column !important;
+            }
+            
+            .split-left, .split-right {
+                flex-basis: 50% !important;
+            }
+            
+            .font-controls {
+                top: 20px;
+                right: 20px;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    
+    <div class="font-controls">
+        <div class="font-btn" id="decrease-font">
+            <i class="fas fa-font"></i>
+        </div>
+        <div class="font-btn" id="increase-font">
+            <i class="fas fa-text-height"></i>
+        </div>
+    </div>
+    
+    <div class="presentation-container">
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <div class="nav-dots" id="nav-dots">
+                <!-- Navigation dots will be generated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="slides-container">
+            <!-- Decorative Background Elements -->
+            <div class="decoration circle1"></div>
+            <div class="decoration circle2"></div>
+            <div class="decoration circle3"></div>
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active" id="slide1">
+                <div class="slide-header">
+                    <h1 class="slide-title">Problem-Based Digital Context Learning for Nursing Education</h1>
+                    <div class="slide-number">1/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-user"></i> Presenters</h2>
+                        <p>Shouq Mubarak 2260500076</p>
+                        <p>Sahar Ali 2260500067</p>
+                        <p>Layla Alosaif 2260500059</p>
+                        <p>Narjes Alsaleh 2250500155</p>
+                        <p>Yaqoub yousef 2260500062</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2: Objectives -->
+            <div class="slide" id="slide2">
+                <div class="slide-header">
+                    <h1 class="slide-title">Objectives</h1>
+                    <div class="slide-number">2/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-bullseye"></i> Learning Goals</h2>
+                        <ul class="icon-list">
+                            <li><i class="fas fa-book"></i> Define Problem-Based Digital Context Learning (PBDCL) and its core components.</li>
+                            <li><i class="fas fa-chalkboard-teacher"></i> Explain the key principles and the cyclical process of PBDCL.</li>
+                            <li><i class="fas fa-lightbulb"></i> Identify at least three benefits of implementing PBDCL in nursing education.</li>
+                            <li><i class="fas fa-pencil-ruler"></i> Design a simple framework for a PBDCL curriculum by applying the principles.</li>
+                            <li><i class="fas fa-tasks"></i> Identify common challenges associated with PBDCL implementation and strategies to overcome them.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: Outlines -->
+            <div class="slide" id="slide3">
+                <div class="slide-header">
+                    <h1 class="slide-title">Outlines</h1>
+                    <div class="slide-number">3/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-list-ol"></i> Presentation Structure</h2>
+                        <ol class="icon-list">
+                            <li><i class="fas fa-search"></i> Definition of PBDCL</li>
+                            <li><i class="fas fa-key"></i> Key Principles</li>
+                            <li><i class="fas fa-sync-alt"></i> The PBDCL Process</li>
+                            <li><i class="fas fa-star"></i> Benefits</li>
+                            <li><i class="fas fa-clipboard-list"></i> Examples</li>
+                            <li><i class="fas fa-hands-helping"></i> Interactive Activity: Build a PBDCL Program</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> Challenges & Solutions</li>
+                            <li><i class="fas fa-landmark"></i> Responsible bodies in SA</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: What is PBDCL? -->
+            <div class="slide" id="slide4">
+                <div class="slide-header">
+                    <h1 class="slide-title">What is Problem-Based Digital Context Learning (PBDCL)?</h1>
+                    <div class="slide-number">4/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-book"></i> Definition</h2>
+                        <p>A student-centered approach where learners engage with realistic, contextualized problems in a digital environment like simulations, virtual patients, and online platforms, to develop clinical reasoning and knowledge.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Key Principles -->
+            <div class="slide" id="slide5">
+                <div class="slide-header">
+                    <h1 class="slide-title">Key Principles of PBDCL</h1>
+                    <div class="slide-number">5/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="principle-card">
+                        <span class="principle-number">1</span>
+                        <div>
+                            <strong>Problem as the Starting Point:</strong> Learning begins with a compelling clinical scenario
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-number">2</span>
+                        <div>
+                            <strong>Student-Centered Learning:</strong> The tutor is a facilitator; students drive their own learning
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-number">3</span>
+                        <div>
+                            <strong>Digital Immersion:</strong> Uses technology (VR, e-learning modules, video) to simulate reality
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-number">4</span>
+                        <div>
+                            <strong>Collaboration in teams:</strong> Students work in teams, mirroring interdisciplinary healthcare
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <span class="principle-number">5</span>
+                        <div>
+                            <strong>Reflection and critical analysis:</strong> Critical analysis of the learning process and outcomes is essential
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: The PBDCL Process -->
+            <div class="slide" id="slide6">
+                <div class="slide-header">
+                    <h1 class="slide-title">The PBDCL Process</h1>
+                    <div class="slide-number">6/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Present Problem:</strong> Introduce a digital clinical scenario
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Identify Knowledge Gaps:</strong> What do we need to know to solve this?
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Self-Directed Learning:</strong> Research using digital resources
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <strong>Collaborate & Synthesize:</strong> Discuss findings and apply them to the problem
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <strong>Present Solution & Reflect:</strong> Propose an intervention and reflect on the process
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 7: Benefits -->
+            <div class="slide" id="slide7">
+                <div class="slide-header">
+                    <h1 class="slide-title">Benefits of PBDCL</h1>
+                    <div class="slide-number">7/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="benefit-item">
+                        <i class="fas fa-brain"></i>
+                        <div>Enhances Critical Thinking</div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <div>Improves Digital Literacy</div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-users"></i>
+                        <div>Increases Engagement</div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>Safe Practice Environment</div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div>Aligns with Saudi Vision 2030</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 8: Examples -->
+            <div class="slide" id="slide8">
+                <div class="slide-header">
+                    <h1 class="slide-title">Examples in Nursing Education & Practice</h1>
+                    <div class="slide-number">8/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="example-card">
+                        <div class="example-title">Virtual Maternity Ward simulation</div>
+                        <p>Immersive simulation for practicing maternity care scenarios in a risk-free environment.</p>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-title">E-Learning Module on MERS-CoV</div>
+                        <p>Digital training module for managing MERS-CoV cases with interactive case studies.</p>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-title">Community Health Game app for awareness</div>
+                        <p>Gamified application for teaching community health concepts and preventive care.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 9: Interactive Activity -->
+            <div class="slide" id="slide9">
+                <div class="slide-header">
+                    <h1 class="slide-title">Interactive Activity: Build a PBDCL Program</h1>
+                    <div class="slide-number">9/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-tasks"></i> Mission</h2>
+                        <p>Design a PBDCL curriculum for 'Post-Op Pain Management.'</p>
+                    </div>
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-user-md"></i> Skill</h2>
+                        <p>Nursing Assessment and Intervention.</p>
+                    </div>
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-tools"></i> Tool</h2>
+                        <p>Sticky notes (virtual/physical).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 10: Interactive Activity Steps 1 & 2 (Split Screen) -->
+            <div class="slide split-slide" id="slide10">
+                <div class="split-container" id="split-container-10">
+                    <div class="split-left" id="split-left-10">
+                        <div class="split-controls">
+                            <input class="split-url" id="url-10" placeholder="Enter web link (https://example.com)" />
+                            <button class="split-button" id="load-10">Open</button>
+                        </div>
+                        <div class="split-nav">
+                            <button class="split-button" id="swap-10">Swap sides</button>
+                            <button class="split-button" id="n1-10">Step 1</button>
+                            <button class="split-button" id="n2-10">Step 2</button>
+                        </div>
+
+                        <div id="slides-10">
+                            <div class="split-slide-content active" data-i="0">
+                                <h2>Step 1: Define the Problem Scenario</h2>
+                                <p>"What is a realistic, challenging presentation for a chest pain patient in a KSA context?"</p>
+                                <p style="margin-top: 10px; font-style: italic;">(e.g., "A 55-year-old Saudi male with a history of obesity presents with crushing chest pain.")</p>
+                            </div>
+                            <div class="split-slide-content" data-i="1">
+                                <h2>Step 2: Set Learning Objectives</h2>
+                                <p>"What should a nurse be able to DO after solving this case?"</p>
+                                <p style="margin-top: 10px; font-style: italic;">(e.g., "Prioritize initial nursing assessments," "Interpret a basic EKG," "Administer prescribed medications safely.")</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="split-drag" id="dragger-10" title="Drag to resize"></div>
+
+                    <div class="split-right" id="split-right-10">
+                        <iframe id="viewer-10" srcdoc="<p style='color:#fff;padding:1rem'>Load a URL from the left panel to display digital tools or resources</p>"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 11: Interactive Activity Steps 3-5 (Split Screen) -->
+            <div class="slide split-slide" id="slide11">
+                <div class="split-container" id="split-container-11">
+                    <div class="split-left" id="split-left-11">
+                        <div class="split-controls">
+                            <input class="split-url" id="url-11" placeholder="Enter web link (https://example.com)" />
+                            <button class="split-button" id="load-11">Open</button>
+                        </div>
+                        <div class="split-nav">
+                            <button class="split-button" id="swap-11">Swap sides</button>
+                            <button class="split-button" id="n1-11">Step 3</button>
+                            <button class="split-button" id="n2-11">Step 4</button>
+                            <button class="split-button" id="n3-11">Step 5</button>
+                        </div>
+
+                        <div id="slides-11">
+                            <div class="split-slide-content active" data-i="0">
+                                <h2>Step 3: Choose Digital Tools</h2>
+                                <p>"What digital tools can students use to solve this?"</p>
+                                <p style="margin-top: 10px; font-style: italic;">(e.g., "A video of the patient," "A simulated EKG app," "An online drug database," "A virtual 'huddle' on Teams.")</p>
+                            </div>
+                            <div class="split-slide-content" data-i="1">
+                                <h2>Step 4: Design the Assessment</h2>
+                                <p>"How do we know they learned?"</p>
+                                <p style="margin-top: 10px; font-style: italic;">(e.g., "Submit a digital nursing care plan," "Record a short video explaining their clinical reasoning.")</p>
+                            </div>
+                            <div class="split-slide-content" data-i="2">
+                                <h2>Step 5: Plan the Facilitation</h2>
+                                <p>"What will the instructor do?"</p>
+                                <p style="margin-top: 10px; font-style: italic;">(e.g., "Post the initial trigger," "Host the discussion forum," "Provide digital feedback on the care plan.")</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="split-drag" id="dragger-11" title="Drag to resize"></div>
+
+                    <div class="split-right" id="split-right-11">
+                        <iframe id="viewer-11" srcdoc="<p style='color:#fff;padding:1rem'>Load a URL from the left panel to display digital tools or resources</p>"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 12: Activity Conclusion (Split Screen) -->
+            <div class="slide split-slide" id="slide12">
+                <div class="split-container" id="split-container-12">
+                    <div class="split-left" id="split-left-12">
+                        <div class="split-controls">
+                            <input class="split-url" id="url-12" placeholder="Enter web link (https://example.com)" />
+                            <button class="split-button" id="load-12">Open</button>
+                        </div>
+                        <div class="split-nav">
+                            <button class="split-button" id="swap-12">Swap sides</button>
+                            <button class="split-button" id="n1-12">Conclusion</button>
+                        </div>
+
+                        <div id="slides-12">
+                            <div class="split-slide-content active" data-i="0">
+                                <h2>Conclusion</h2>
+                                <p>Look at our board! We have just collaboratively designed the skeleton of a PBDCL program.</p>
+                                <p style="margin-top: 20px;">This interactive approach allows nursing students to:</p>
+                                <ul>
+                                    <li>Apply theoretical knowledge to realistic scenarios</li>
+                                    <li>Develop clinical reasoning skills in a safe environment</li>
+                                    <li>Collaborate effectively with peers</li>
+                                    <li>Become proficient with digital healthcare tools</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="split-drag" id="dragger-12" title="Drag to resize"></div>
+
+                    <div class="split-right" id="split-right-12">
+                        <iframe id="viewer-12" srcdoc="<p style='color:#fff;padding:1rem'>Load a URL from the left panel to display collaborative tools or resources</p>"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 13: Challenges & Solutions -->
+            <div class="slide" id="slide13">
+                <div class="slide-header">
+                    <h1 class="slide-title">Challenges & How to Overcome</h1>
+                    <div class="slide-number">13/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="challenge-solution">
+                        <div class="challenge">
+                            <strong>Faculty Training</strong>
+                        </div>
+                        <div class="solution">
+                            <strong>→ Workshops</strong>
+                        </div>
+                    </div>
+                    <div class="challenge-solution">
+                        <div class="challenge">
+                            <strong>Technology Cost</strong>
+                        </div>
+                        <div class="solution">
+                            <strong>→ Use free tools</strong>
+                        </div>
+                    </div>
+                    <div class="challenge-solution">
+                        <div class="challenge">
+                            <strong>Student Resistance</strong>
+                        </div>
+                        <div class="solution">
+                            <strong>→ Start small</strong>
+                        </div>
+                    </div>
+                    <div class="challenge-solution">
+                        <div class="challenge">
+                            <strong>Curriculum Time</strong>
+                        </div>
+                        <div class="solution">
+                            <strong>→ Integrate gradually</strong>
+                        </div>
+                    </div>
+                    <div class="challenge-solution">
+                        <div class="challenge">
+                            <strong>Cultural Relevance</strong>
+                        </div>
+                        <div class="solution">
+                            <strong>→ Use Saudi-specific cases</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 14: Responsible Bodies in SA -->
+            <div class="slide" id="slide14">
+                <div class="slide-header">
+                    <h1 class="slide-title">Responsible Bodies for PBDCL Implementation in SA</h1>
+                    <div class="slide-number">14/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="body-card">
+                        <h2 class="card-title"><i class="fas fa-university"></i> Education and Training Evaluation Commission (ETEC)</h2>
+                    </div>
+                    <div class="body-card">
+                        <h2 class="card-title"><i class="fas fa-graduation-cap"></i> National Commission for Academic Accreditation and Assessment (NCAAA)</h2>
+                    </div>
+                    <div class="body-card">
+                        <h2 class="card-title"><i class="fas fa-user-md"></i> Saudi Commission for Health Specialties (SCFHS)</h2>
+                    </div>
+                    <div class="body-card">
+                        <h2 class="card-title"><i class="fas fa-landmark"></i> Ministry of Education & Ministry of Health</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 15: Summary & Conclusion -->
+            <div class="slide" id="slide15">
+                <div class="slide-header">
+                    <h1 class="slide-title">Summary & Conclusion</h1>
+                    <div class="slide-number">15/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <ul class="icon-list">
+                            <li><i class="fas fa-bridge"></i> PBDCL bridges theory and practice.</li>
+                            <li><i class="fas fa-user-graduate"></i> Prepares Saudi nurses for digital healthcare.</li>
+                            <li><i class="fas fa-globe"></i> Focus on real-world, collaborative learning.</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h2 class="card-title"><i class="fas fa-comments"></i> Thank you! Questions?</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 16: References -->
+            <div class="slide" id="slide16">
+                <div class="slide-header">
+                    <h1 class="slide-title">References</h1>
+                    <div class="slide-number">16/16</div>
+                </div>
+                <div class="slide-content">
+                    <div class="content-card">
+                        <p>Barrows, H.S. (1996). Problem-based learning in medicine.</p>
+                        <p>AlHosis, K. et al. (2022). Virtual simulation in Saudi Arabia.</p>
+                        <p>Saudi Vision 2030 (2016). Health Sector Transformation.</p>
+                        <p>Yew, E.H., & Goh, K. (2016). Problem-based learning overview.</p>
+                        <p>Almutairi, W. M., Almutaraiy, S. M., Al-Zahrani, A., Alsharif, F., Faheem, W. A., Abunar, A., & Thabet, H. A. (2025). Transforming Postpartum Care: The Efficacy of Simulation Training in Hemorrhage Management Among Nurses. Healthcare (Basel, Switzerland), 13(5), 549.</p>
+                        <p>Minor, K. C., Bianco, K., Mayo, J. A., Abir, G., Judy, A. E., Lee, H. C., Leonard, S. A., Ayotte, S., Hedli, L. C., Schaffer, K., Sie, L., & Daniels, K. (2024). Virtual simulation training for postpartum hemorrhage in low-to-moderate-volume hospitals in the US. AJOG global reports, 4(3), 100357.</p>
+                        <p>Al-Tawfiq, J. A., Rothwell, S., Mcgregor, H. A., & Khouri, Z. A. (2018). A multi-faceted approach of a nursing led education in response to MERS-CoV infection. Journal of infection and public health, 11(2), 260–264.</p>
+                        <p>Stirling, B.V., Harmston, J. & Alsobayel, H. An educational programme for nursing college staff and students during a MERS- coronavirus outbreak in Saudi Arabia. BMC Nurs 14, 20 (2015).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Controls -->
+        <div class="nav-controls">
+            <div class="nav-btn" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="nav-btn" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const navDots = document.getElementById('nav-dots');
+            const progressBar = document.getElementById('progress-bar');
+            const increaseFontBtn = document.getElementById('increase-font');
+            const decreaseFontBtn = document.getElementById('decrease-font');
+            let currentSlide = 0;
+            
+            // Font size control
+            let fontSize = 1.3;
+            let titleSize = 2.5;
+            let cardTitleSize = 1.5;
+            
+            function updateFontSizes() {
+                document.documentElement.style.setProperty('--font-size', `${fontSize}rem`);
+                document.documentElement.style.setProperty('--title-size', `${titleSize}rem`);
+                document.documentElement.style.setProperty('--card-title-size', `${cardTitleSize}rem`);
+            }
+            
+            increaseFontBtn.addEventListener('click', () => {
+                fontSize = Math.min(2.0, fontSize + 0.1);
+                titleSize = Math.min(3.5, titleSize + 0.2);
+                cardTitleSize = Math.min(2.2, cardTitleSize + 0.15);
+                updateFontSizes();
+            });
+            
+            decreaseFontBtn.addEventListener('click', () => {
+                fontSize = Math.max(1.0, fontSize - 0.1);
+                titleSize = Math.max(1.8, titleSize - 0.2);
+                cardTitleSize = Math.max(1.2, cardTitleSize - 0.15);
+                updateFontSizes();
+            });
+            
+            // Create navigation dots
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('nav-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                navDots.appendChild(dot);
+            });
+            
+            // Update slide numbers
+            function updateSlideNumbers() {
+                document.querySelectorAll('.slide-number').forEach((el, index) => {
+                    el.textContent = `${index + 1}/${slides.length}`;
+                });
+            }
+            
+            // Initialize the first slide
+            showSlide(currentSlide);
+            updateSlideNumbers();
+            
+            // Navigation functions
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[index].classList.add('active');
+                
+                // Update dots
+                document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                    
+                    // Mark previous slides as completed
+                    if (i < index) {
+                        dot.classList.add('completed');
+                    } else {
+                        dot.classList.remove('completed');
+                    }
+                });
+                
+                // Update progress bar
+                progressBar.style.width = `${(index / (slides.length - 1)) * 100}%`;
+                
+                currentSlide = index;
+            }
+            
+            function goToSlide(index) {
+                if (index >= 0 && index < slides.length) {
+                    showSlide(index);
+                }
+            }
+            
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    goToSlide(currentSlide + 1);
+                }
+            }
+            
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+            
+            // Event listeners for navigation
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+                if (e.key === 'ArrowLeft') prevSlide();
+            });
+            
+            // Initialize split-screen slides
+            function initializeSplitScreen(slideNum) {
+                const cont = document.getElementById(`split-container-${slideNum}`);
+                const left = document.getElementById(`split-left-${slideNum}`);
+                const drag = document.getElementById(`dragger-${slideNum}`);
+                const url = document.getElementById(`url-${slideNum}`);
+                const load = document.getElementById(`load-${slideNum}`);
+                const viewer = document.getElementById(`viewer-${slideNum}`);
+                const swap = document.getElementById(`swap-${slideNum}`);
+                const slides = [...document.querySelectorAll(`#slides-${slideNum} .split-slide-content`)];
+
+                // Load link
+                load.addEventListener('click', () => {
+                    try{
+                        const val = url.value.trim();
+                        if(!val) return alert('Type a link');
+                        viewer.src = val;
+                    }catch(e){alert('Invalid URL')}
+                });
+
+                // drag to resize (25% -> 50% typical)
+                let dragging=false;
+                drag.addEventListener('pointerdown', e=>{dragging=true;document.body.style.userSelect='none'});
+                window.addEventListener('pointerup', ()=>{dragging=false;document.body.style.userSelect=''});
+                window.addEventListener('pointermove', e=>{
+                    if(!dragging) return;
+                    const pct = Math.max(20, Math.min(70, (e.clientX/window.innerWidth)*100));
+                    left.style.flexBasis = pct + '%';
+                });
+
+                // swap
+                swap.addEventListener('click', () => {
+                    cont.insertBefore(cont.lastElementChild, cont.firstElementChild);
+                });
+
+                // slide nav
+                for(let i = 1; i <= slides.length; i++) {
+                    document.getElementById(`n${i}-${slideNum}`).addEventListener('click', () => showSplitSlide(i-1));
+                }
+                
+                function showSplitSlide(i){
+                    slides.forEach(s=>s.classList.toggle('active', Number(s.dataset.i)===i));
+                }
+            }
+            
+            // Initialize all split-screen slides
+            initializeSplitScreen(10);
+            initializeSplitScreen(11);
+            initializeSplitScreen(12);
+        });
+    </script>
+</body>
+</html>
